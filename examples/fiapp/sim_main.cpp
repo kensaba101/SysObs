@@ -59,7 +59,7 @@ int main(int argc, char** argv, char** env) {
             if (main_time > 1 && main_time < 10) {
                 top->reset = !0; // Assert reset 
                 }   
-            else if (main_time >= 10 && main_time <20{
+            else if (main_time >= 10 && main_time <20){
                 top->reset = !1;  // Deassert reset
                 top->a = !top->a; 
                 }
