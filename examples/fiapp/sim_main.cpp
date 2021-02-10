@@ -69,7 +69,6 @@ int main(int argc, char** argv, char** env) {
                 top->enable = 0; //deassert enable
             }
         }
-    }
 
         // Evaluate model
         // (If you have multiple models being simulated in the same
@@ -89,6 +88,9 @@ int main(int argc, char** argv, char** env) {
         VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%08x_%08x\n",
                   main_time, top->clk, top->reset, top->enable, top->a, top->o1,
                   top->o2, top->o3); 
+    }
+
+        
 
     // Final model cleanup
     top->final();
