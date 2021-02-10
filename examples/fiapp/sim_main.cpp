@@ -4,6 +4,8 @@
 // Include model header, generated from Verilating "[modulename].v"
 #include "Vfiapp.h"
 
+#define SIMULATE_UNTIL 40
+
 // Current simulation time (64-bit unsigned)
 vluint64_t main_time = 0;
 // Called by $time in Verilog
@@ -55,6 +57,8 @@ int main(int argc, char** argv, char** env) {
         // to where the controls are sampled; in this example we do
         // this only on a negedge of clk, because we know
         // reset is not sampled there.
+
+
         if (!top->clk) {
             if (main_time > 1 && main_time < 10) {
                 top->reset = !0; // Assert reset 
@@ -63,10 +67,15 @@ int main(int argc, char** argv, char** env) {
                 top->reset = !1;  // Deassert reset
                 top->a = !top->a; 
                 }
-            else if (main_time >= 20) {
+            else if (main_time >= 20 && main_time <30) {
                 top->reset = !1;  
                 top->a = !top->a;
                 top->enable = 0; //deassert enable
+            }
+            else if (main_time >= 30) {
+                top->reset = !1;  
+                top->a = !top->a;
+                top->enable = 1; //assert enable
             }
         }
 
@@ -85,9 +94,12 @@ int main(int argc, char** argv, char** env) {
                   */
 
         //toprint: time, clk, reset, enable, a, o1, o2, o3
-        VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%08x_%08x\n",
+        VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%x_%x\n",
                   main_time, top->clk, top->reset, top->enable, top->a, top->o1,
                   top->o2, top->o3); 
+        if(main_time > SIMULATE_UNTIL){
+            break;
+        }
     }
 
         
