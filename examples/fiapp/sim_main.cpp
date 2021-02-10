@@ -90,12 +90,12 @@ int main(int argc, char** argv, char** env) {
                   main_time, top->clk, top->reset, top->enable, top->a, top->o1,
                   top->o2, top->o3); 
     }
-    
+
     // Final model cleanup
     top->final();
 
 /*    //  Coverage analysis (since test passed)
-#if VM_COVERAGE
+#if VM_COVERAGE 
     Verilated::mkdir("logs");
     VerilatedCov::write("logs/coverage.dat");
 #endif */
