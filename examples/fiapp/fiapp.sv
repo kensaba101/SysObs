@@ -4,6 +4,7 @@ module fiapp
     input logic reset, 
     input logic a, 
     input logic enable,
+    
     output logic o1, 
     output logic o2,
     output logic o3
