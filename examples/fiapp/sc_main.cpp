@@ -62,14 +62,14 @@ int sc_main(int argc, char* argv[]) {
 
         // Apply inputs
         if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
-            reset_l = !1;  // Assert reset
+            reset = !0;  // Assert reset
             cout << top->o1 << top->o2 << top->o3 <<endl;  
         } else {
-            reset_l = !0;  // Deassert reset
+            reset = !1;  // Deassert reset
             cout << top->o1 << top->o2 << top->o3 <<endl;
         }
 
-        // Simulate 1ns
+        // Simulate 1ns 
         sc_start(1, SC_NS);
     }
 
