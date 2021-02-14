@@ -34,13 +34,13 @@ int sc_main(int argc, char* argv[]) {
     //sc_clock fastclk("fastclk", 2, SC_NS, 0.5, 2, SC_NS, true);
 
     // Define interconnect
-    sc_signal<bool> reset;
-    sc_signal<bool> a;
-    sc_signal<bool> enable;
+    sc_signal<sc_uint<1>> reset;
+    sc_signal<sc_uint<1>> a;
+    sc_signal<sc_uint<1>> enable;
 
-    sc_signal<bool> o1;
-    sc_signal<bool> o2;
-    sc_signal<bool> o3;
+    sc_signal<sc_uint<1>> o1;
+    sc_signal<sc_uint<1>> o2;
+    sc_signal<sc_uint<1>> o3;
 
     // Construct the Verilated model, from inside V[modulename].h
     Vfiapp* top = new Vfiapp("top");
