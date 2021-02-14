@@ -49,7 +49,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Construct the Verilated model, from inside Vtop.h
     // Using unique_ptr is similar to "Vtop* top = new Vtop" then deleting at end
-    const std::unique_ptr<Vfiapp> top{new Vfiapp{"top"}}
+    const std::unique_ptr<Vfiapp> top{new Vfiapp{"top"}};
     // Attach signals to the model
     top->clk(clk);
     top->reset(reset);
