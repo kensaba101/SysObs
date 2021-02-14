@@ -55,10 +55,10 @@ int sc_main(int argc, char* argv[]) {
     top->o3(o3);
 
     // Set some inputs
-    top->reset = 0; //reset is active high
-    top->clk = 0;
-    top->a = 0;
-    top->enable = 1; //active high
+    reset = 0; //reset is active high
+    clk = 0;
+    a = 0;
+    enable = 1; //active high
 
     // You must do one evaluation before enabling waves, in order to allow
     // SystemC to interconnect everything for testing.
@@ -72,25 +72,25 @@ int sc_main(int argc, char* argv[]) {
 
         // Apply inputs on negedge
         if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
-            top->reset = !0;  // Assert reset
-            top->a = 1;
-            top->enable(1);
+            reset = !0;  // Assert reset
+            a = 1;
+            enable(1);
         } else if(sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)) {
-            top->reset = !1;  // Deassert reset
-            top->a = !top->a;
-            top->enable = 0;
+            reset = !1;  // Deassert reset
+            a = !a;
+            enable = 0;
         } else if(sc_time_stamp() >= sc_time(20, SC_NS) && sc_time_stamp() < sc_time(30, SC_NS)) {
-            top->reset = !1;  // Deassert reset
-            top->a = !top->a;
-            top->enable = 1;
+            reset = !1;  // Deassert reset
+            a = !a;
+            enable = 1;
         } else (sc_time_stamp() >= sc_time(20, SC_NS) && sc_time_stamp() < sc_time(40, SC_NS)) {
-            top->reset = !1;  // Deassert reset
-            top->a = !top->a;
-            top->enable = !top->enable;
+            reset = !1;  // Deassert reset
+            a = !a;
+            enable = !enable;
         }
 
         //print out what's relevant
-        cout << top->o1 << top->o2 << top->o3 <<endl;
+        cout << o1 << o2 << o3 <<endl;
         // Simulate 1ns 
         sc_start(1, SC_NS);
     }
