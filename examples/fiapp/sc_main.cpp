@@ -1,4 +1,6 @@
 #include <systemc.h>
+// For std::unique_ptr
+#include <memory>
 
 // Include common routines
 #include <verilated.h>
@@ -43,7 +45,11 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_uint<1>> o3;
 
     // Construct the Verilated model, from inside V[modulename].h
-    Vfiapp* top = new Vfiapp("top");
+    //Vfiapp* top = new Vfiapp("top");
+
+    // Construct the Verilated model, from inside Vtop.h
+    // Using unique_ptr is similar to "Vtop* top = new Vtop" then deleting at end
+    const std::unique_ptr<Vfiapp> top{new Vfiapp{"top"}}
     // Attach signals to the model
     top->clk(clk);
     top->reset(reset);
@@ -99,8 +105,8 @@ int sc_main(int argc, char* argv[]) {
     top->final();
 
     // Destroy model
-    delete top;
-    top = nullptr;
+    //delete top;
+    //top = nullptr;
 
     // Fin
     return 0;
