@@ -24,7 +24,7 @@ int sc_main(int argc, char** argv) {
         Verilated::commandArgs(argc, argv);
 
         // Define Clock: period = 1 ns, duty cycle 50%, posedge sensitive
-        sc_clock clk("clk", 1, SC_NS, 0.5, true);
+        sc_clock clk("clk", 2, SC_NS, 0.5, true);
 
         // Define interconnects
         sc_signal<bool> reset;
