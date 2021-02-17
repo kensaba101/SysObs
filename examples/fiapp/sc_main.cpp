@@ -59,22 +59,23 @@ int sc_main(int argc, char** argv) {
 
         while (!Verilated::gotFinish()) { 
 
-            // Apply inputs
-            if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
-                reset = 1;  // Assert reset
-            } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
-                reset = 0;  // Deassert reset
-                a = !a; 
-            } else if (sc_time_stamp() >= sc_time(20, SC_NS) && sc_time_stamp() < sc_time(30, SC_NS)){
-                reset = 0;  // Deassert reset
-                a = !a; 
-                enable = 0; // Deassert enable
-            } else if (sc_time_stamp() >= sc_time(30, SC_NS) && sc_time_stamp() < sc_time(40, SC_NS)){
-                reset = 0;  // Deassert reset
-                a = !a; 
-                enable = 1;  // Reassert enable
+            // Apply control inputs on negedge, as reset and enable are sampled on posedge
+            if (!clk){
+                if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
+                    reset = 1;  // Assert reset
+                } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
+                    reset = 0;  // Deassert reset
+                    a = !a; 
+                } else if (sc_time_stamp() >= sc_time(20, SC_NS) && sc_time_stamp() < sc_time(30, SC_NS)){
+                    reset = 0;  // Deassert reset
+                    a = !a; 
+                    enable = 0; // Deassert enable
+                } else if (sc_time_stamp() >= sc_time(30, SC_NS) && sc_time_stamp() < sc_time(40, SC_NS)){
+                    reset = 0;  // Deassert reset
+                    a = !a; 
+                    enable = 1;  // Reassert enable
+                }
             }
-
             // Progress the sc Clock by 1 ns
             sc_start(1, SC_NS); 
             //toprint: time, clk, reset, enable, a, o1, o2, o3
