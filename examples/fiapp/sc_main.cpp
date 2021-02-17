@@ -57,10 +57,10 @@ int sc_main(int argc, char** argv) {
 
             // Apply inputs
             if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
-            reset_l = 1;  // Assert reset
+            reset = 1;  // Assert reset
             cout << o1 << o2 << o3 << endl;
             } else {
-            reset_l = 0;  // Deassert reset
+            reset = 0;  // Deassert reset
             cout << o1 << o2 << o3 << endl; 
             }
 
