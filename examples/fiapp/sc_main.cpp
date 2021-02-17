@@ -79,9 +79,12 @@ int sc_main(int argc, char** argv) {
             sc_start(1, SC_NS); 
             //toprint: time, clk, reset, enable, a, o1, o2, o3
             //cout << o1 << o2 << o3 << endl;
+            /*
             VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%x_%x\n",
                   sc_time_stamp(), clk, reset, enable, a, o1,
-                  o2, o3); 
+                  o2, o3); */
+            cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
+                << " o2=" << o2 << " o3=" << o3; 
 
             if(sc_time_stamp() > sc_time(SIMULATE_UNTIL_TIME, SC_NS) ){
                 break;
