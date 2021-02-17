@@ -56,31 +56,33 @@ int sc_main(int argc, char** argv) {
         
         // Initialize SC model
         sc_start(1, SC_NS);
-        
+
         while (!Verilated::gotFinish()) { 
 
             // Apply inputs
             if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
                 reset = 1;  // Assert reset
-                cout << o1 << o2 << o3 << endl;
             } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
                 reset = 0;  // Deassert reset
                 a = !a; 
-                cout << o1 << o2 << o3 << endl; 
             } else if (sc_time_stamp() >= sc_time(20, SC_NS) && sc_time_stamp() < sc_time(30, SC_NS)){
                 reset = 0;  // Deassert reset
                 a = !a; 
                 enable = 0; // Deassert enable
-                cout << o1 << o2 << o3 << endl; 
             } else if (sc_time_stamp() >= sc_time(30, SC_NS) && sc_time_stamp() < sc_time(40, SC_NS)){
                 reset = 0;  // Deassert reset
                 a = !a; 
                 enable = 1;  // Reassert enable
-                cout << o1 << o2 << o3 << endl; 
             }
 
             
             sc_start(1, SC_NS); 
+            //toprint: time, clk, reset, enable, a, o1, o2, o3
+            //cout << o1 << o2 << o3 << endl;
+            VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%x_%x\n",
+                  sc_time_stamp(), clk, reset, enable, a, o1,
+                  o2, o3); 
+
             if(sc_time_stamp() > sc_time(SIMULATE_UNTIL_TIME, SC_NS) ){
                 break;
             }
