@@ -23,7 +23,7 @@ int sc_main(int argc, char** argv) {
         // This needs to be called before you create any model
         Verilated::commandArgs(argc, argv);
 
-        // Define Clock: period = 1 ns, duty cycle 50%, posedge sensitive
+        // Define Clock: period = 2 ns, duty cycle 50%, posedge sensitive
         sc_clock clk("clk", 2, SC_NS, 0.5, true);
 
         // Define interconnects
@@ -76,14 +76,9 @@ int sc_main(int argc, char** argv) {
                     enable = 1;  // Reassert enable
                 }
             }
-            // Progress the sc Clock by 1 ns
+            // Evaluates model & progresses clock by 1 ns
             sc_start(1, SC_NS); 
-            //toprint: time, clk, reset, enable, a, o1, o2, o3
-            //cout << o1 << o2 << o3 << endl;
-            /*
-            VL_PRINTF("[%" VL_PRI64 "d] clk=%x reset=%x enable=%x a=%x o1,o2,o3=%x_%x_%x\n",
-                  sc_time_stamp(), clk, reset, enable, a, o1,
-                  o2, o3); */
+            //tprint: time, clk, reset, enable, a, o1, o2, o3
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
                 << " o2=" << o2 << " o3=" << o3 << endl; 
 

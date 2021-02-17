@@ -11,7 +11,7 @@ argc = len(sys.argv)
 
 metacommentExample = "/*<--SOI-->*/"
 
-# If file extension == .sv or .v, create copy titled old[filename].sv or old[filename].v
+# If file extension == .sv or .v, create copy titled old[filename].sv or old[filename].v (for backup)
 for x in range(argc):
     inpFile = str(sys.argv[x])
     print(inpFile)
