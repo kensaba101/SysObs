@@ -49,12 +49,14 @@ int sc_main(int argc, char** argv) {
         top->o2(o2);
         top->o3(o3);
 
+        
+        // Initialize SC model
+        sc_start(1, SC_NS);
+        
         // Set some inputs
         top->reset = 0; //reset is active high
         top->a = 0;
         top->enable = 1; //active high
-        // Initialize SC model
-        sc_start(1, SC_NS);
 
         while (!Verilated::gotFinish()) { 
 
