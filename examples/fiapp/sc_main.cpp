@@ -47,7 +47,7 @@ int sc_main(int argc, char** argv) {
 
         top->o1(o1);
         top->o2(o2);
-        top->o3(o2);
+        top->o3(o3);
 
 
         // Initialize SC model
