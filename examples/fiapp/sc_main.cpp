@@ -23,8 +23,8 @@ int sc_main(int argc, char** argv) {
         // This needs to be called before you create any model
         Verilated::commandArgs(argc, argv);
 
-        // Define Clock
-        sc_clock clk("clk", 10, SC_NS, 0.5, 3, SC_NS, true);
+        // Define Clock: period = 1 ns, duty cycle 50%, posedge sensitive
+        sc_clock clk("clk", 1, SC_NS, 0.5, true);
 
         // Define interconnects
         sc_signal<bool> reset;
@@ -75,7 +75,7 @@ int sc_main(int argc, char** argv) {
                 enable = 1;  // Reassert enable
             }
 
-            
+            // Progress the sc Clock by 1 ns
             sc_start(1, SC_NS); 
             //toprint: time, clk, reset, enable, a, o1, o2, o3
             //cout << o1 << o2 << o3 << endl;
