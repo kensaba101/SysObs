@@ -1,4 +1,4 @@
-module fiapp
+module fiappvpi
 (
     input logic clk, 
     input logic reset, 
