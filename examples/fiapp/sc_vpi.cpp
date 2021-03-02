@@ -11,7 +11,7 @@
 #define SIMULATE_UNTIL_TIME 40
 
 void read_and_check() {
-    vpiHandle vh1 = vpi_handle_by_name((PLI_BYTE8*)"TOP.fiappvpi.q1", NULL);
+    vpiHandle vh1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL);
     if (!vh1) { vl_fatal(__FILE__, __LINE__, "sc_vpi", "No handle found"); }
     const char* name = vpi_get_str(vpiName, vh1);
     printf("Module name: %s\n", name);  // Prints "q1"
