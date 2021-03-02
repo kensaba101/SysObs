@@ -11,7 +11,7 @@
 #define SIMULATE_UNTIL_TIME 40
 
 void read_and_check() {
-    vpiHandle vh1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL);
+    vpiHandle vh1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL); //instanceName.moduleName.signalName
     if (!vh1) { vl_fatal(__FILE__, __LINE__, "sc_vpi", "No handle found"); }
     const char* name = vpi_get_str(vpiName, vh1);
     printf("Module name: %s\n", name);  // Prints "q1"
@@ -93,11 +93,11 @@ int sc_main(int argc, char** argv) {
                 }
             }
 
-            
+            read_and_check();
+
             // Evaluates model & progresses clock by 1 ns
             sc_start(1, SC_NS); 
             VerilatedVpi::callValueCbs();  // For signal callbacks
-            read_and_check();
 
             //tprint: time, clk, reset, enable, a, o1, o2, o3
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
