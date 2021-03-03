@@ -10,20 +10,7 @@
 
 
 #define SIMULATE_UNTIL_TIME 50
-/*
-void read_and_check() {
-    vpiHandle vh1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL); //instanceName.moduleName.signalName
-    
-    
-    if (!vh1) { vl_fatal(__FILE__, __LINE__, "sc_vpi", "No handle found"); }
-    const char* name = vpi_get_str(vpiName, vh1);
-    printf("Module name: %s\n", name);  // Prints "q1"
-
-    s_vpi_value v;
-    v.format = vpiIntVal;
-    vpi_get_value(vh1, &v);
-    printf("Value of v: %d\n", v.value.integer);  // Prints "q1"
-} */
+// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp --vpi -Wno-BLKANDNBLK 
 
 int getSoiValue(vpiHandle vh) { //works
    /* if (!vh){
@@ -121,25 +108,25 @@ int sc_main(int argc, char** argv) {
                     reset = 0;  // Deassert reset
                     a = !a; 
                     enable = 1;  // Reassert enable
-                    if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
-                    setSoiValue(vhq1, 1); //shouldn't work because in .sv file, it's declared as read only
-                    setSoiValue(vhq2, 1);
-                    setSoiValue(vhq3, 1);
-                    
-                    }
-                    
-                    cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;  
-                    cout << o1 << o2 << o3 << endl; 
                 }
             } 
-            // Evaluates model & progresses clock by 1 ns
             
-            sc_start(1, SC_NS); 
-            VerilatedVpi::callValueCbs();  // For signal callbacks
-           // sc_start(1, SC_NS); 
-            //tprint: time, clk, reset, enable, a, o1, o2, o3
+            if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
+                setSoiValue(vhq1, 1); //shouldn't work because in .sv file, it's declared as read only
+                setSoiValue(vhq2, 1);
+                setSoiValue(vhq3, 1); }
+            
+            //VerilatedVpi::callValueCbs();  // For signal callbacks
+        
+            //TODO: Fix issue with value injected by setSoiValue not persisting after posedge clk (after sc_start)
+            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;  
+            // Evaluates model & progresses clock by 1 ns
+            sc_start(1, SC_NS);
+            
+            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;  
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
-                << " o2=" << o2 << " o3=" << o3 << endl; 
+                << " o2=" << o2 << " o3=" << o3 << endl;
+            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl << endl;  
 
             if(sc_time_stamp() > sc_time(SIMULATE_UNTIL_TIME, SC_NS) ){
                 break;
