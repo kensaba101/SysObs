@@ -9,6 +9,10 @@ module fiapp
     output logic o2,
     output logic o3
 );
+
+    import "DPI-C" function int getSoiValue (input int a, input int b);
+    import "DPI-C" function void setSoiValue (input int a, input int b);
+
     logic q1, q2, q3; 
 
     assign o1 = q1; 

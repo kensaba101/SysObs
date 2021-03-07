@@ -85,7 +85,7 @@ int sc_main(int argc, char** argv) {
         // Initialize SC model
         sc_start(1, SC_NS);
 
-        Verilated::internalsDump();  // See scopes to help debug
+        //Verilated::internalsDump();  // See scopes to help debug
         vpiHandle vhq1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL); //instanceName.moduleName.signalName
         vpiHandle vhq2 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q2", NULL); 
         vpiHandle vhq3 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q3", NULL); 
