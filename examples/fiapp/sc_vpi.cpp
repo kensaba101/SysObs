@@ -119,14 +119,20 @@ int sc_main(int argc, char** argv) {
             //VerilatedVpi::callValueCbs();  // For signal callbacks
         
             //TODO: Fix issue with value injected by setSoiValue not persisting after posedge clk (after sc_start)
-            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;  
+            cout << "q1, q2, q3 before calling sc_start(): " << endl; 
+            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;
+            cout << "o1, o2, o3 before calling sc_start(): "
+            cout << o1 << o2 << o3 << endl; 
             // Evaluates model & progresses clock by 1 ns
             sc_start(1, SC_NS);
             
-            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;  
+            cout << "q1, q2, q3 after calling sc_start()" << endl; 
+            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl;
+            cout << "o1, o2, o3 before calling sc_start(): "
+            cout << o1 << o2 << o3 << endl; 
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
                 << " o2=" << o2 << " o3=" << o3 << endl;
-            cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl << endl;  
+            //cout << getSoiValue(vhq1) << getSoiValue(vhq2) << getSoiValue(vhq3) << endl << endl;  
 
             if(sc_time_stamp() > sc_time(SIMULATE_UNTIL_TIME, SC_NS) ){
                 break;
