@@ -10,8 +10,8 @@ module fiapp
     output logic o3
 );
 
-    import "DPI-C" function int getSoiValue (input int a, input int b);
-    import "DPI-C" function void setSoiValue (input int a, input int b);
+    import "DPI-C" function int getSoiValue (output int soi);
+    import "DPI-C" function void setSoiValue (output int soi, input int val); 
 
     logic q1, q2, q3; 
 
@@ -34,3 +34,15 @@ module fiapp
     end
 endmodule
 
+///* //toTry 1: 
+function void getSoiValueSV(int soi);
+    // Call C function
+    getSoiValue(soi); // Arguments passed by copy
+    
+endfunction
+
+function void setSoiValueSV(output int soi, output int val);
+    // Call C function
+    getSoiValue(soi, val); // Arguments passed by copy
+endfunction
+//*/

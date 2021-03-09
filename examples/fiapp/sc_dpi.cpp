@@ -12,12 +12,19 @@
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
 
-int getSoiValue(sc_signal<bool> soi){
+/*
+"An imported function that is intended to call exported functions or to access 
+SystemVerilog data objects other then its actual arguments (e.g. via VPI or PLI calls) must be specified as context.  
+If it is not, it can lead to unpredictable behaviour, even crash. Calling context functions will decrease simulation performance.
+All export functions are always context functions." - Doulos tutorial
+*/
+
+int getSoiValue(int soi){ 
 
     return int(soi); 
 }
 
-void setSoiValue(sc_signal<bool> soi, int i){
+void setSoiValue(int soi, int val){
 
 }
 
