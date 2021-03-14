@@ -6,11 +6,17 @@ import re
 
 cwd = os.getcwd()
 
-# soihelper is called (by sysobs program) with only two things, soi.csv file, and all RTL files (no cpp file)
+# Script functions: Modification of rtl files
+# Insert VPI metacomments (as required by verilator)
+# 
+
 print( "Number of arguments:", len(sys.argv), "arguments." )
 argc = len(sys.argv)
 
 metacomment = "/*<--SOI-->*/"
+metacommentVpi = "/*verilator public_flat*/"
+metacommentDpi = " "
+
 insertBefore = ";"
 
 # Enable user to use csv files of names other than the default (soi.csv) 
