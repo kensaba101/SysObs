@@ -8,7 +8,7 @@ cwd = os.getcwd()
 
 # Script functions: Modification of rtl files
 # Insert VPI metacomments (as required by verilator)
-# 
+# Insert
 
 print( "Number of arguments:", len(sys.argv), "arguments." )
 argc = len(sys.argv)
@@ -91,3 +91,5 @@ with open(cwd + '/' + csvFileName) as csvFile:
             print(lineNum)
             lineCount +=1
         insertMetacomment(moduleName, lineNum, insertBefore, metacomment)
+
+# RTL file modification (SV-side code changes (for DPI) ) TODO:

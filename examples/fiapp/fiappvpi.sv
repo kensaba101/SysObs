@@ -12,7 +12,7 @@ module fiappvpi
 
     //Global switch (--public-flat-rw can be used to turn everything in sim accessible by VPI, but will reduce performance and possibly cause clock  mis-simulation)
     logic q1 /*verilator public_flat_rd*/; //q1 is read only
-    logic q2 /*verilator public_flat_rw @(posedge clk) */; //q2 is writae only
+    logic q2 /*verilator public_flat_rw @(posedge clk) */; //q2 is write only
     logic q3 /*verilator public_flat*/; //read or write by using c code
 
     assign o1 = q1; 
