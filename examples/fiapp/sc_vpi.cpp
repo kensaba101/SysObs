@@ -10,12 +10,9 @@
 
 
 #define SIMULATE_UNTIL_TIME 50
-// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp --vpi -Wno-BLKANDNBLK 
+// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp --vpi --Mdir obj_vpi -Wno-BLKANDNBLK 
 
 int getSoiValue(vpiHandle vh) { //works
-   /* if (!vh){
-        vl_fatal(__FILE__, __LINE__, "sc_vpi", "No handle found");
-    } */
     
     s_vpi_value v; 
     v.format = vpiIntVal; 
@@ -25,9 +22,9 @@ int getSoiValue(vpiHandle vh) { //works
 }
 
 void setSoiValue(vpiHandle vh, int i) { //works
-    if (!vh){
+   /* if (!vh){
         vl_fatal(__FILE__, __LINE__, "sc_vpi", "No handle found");
-    }
+    } */
     
     s_vpi_value v; 
     v.format = vpiIntVal; 

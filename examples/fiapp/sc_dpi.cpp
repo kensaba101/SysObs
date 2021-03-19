@@ -20,16 +20,28 @@ If it is not, it can lead to unpredictable behaviour, even crash. Calling contex
 All export functions are always context functions." - Doulos tutorial
 */
 
-// /* ToTry1:
-int getSoiValue(int soi){ 
+ /* ToTry1:
+int getSoiValue(svlogic soi){ //imported over by SV side
 
     return int(soi); 
 }
 
-void setSoiValue(int soi, int val){
+void setSoiValue(svlogic soi, int val){ //imported over by SV side
 
 }
-// */
+
+void callSetVal(){ //called by sim wrapper
+
+}
+
+void callGetVal(){ //called by sim wrapper
+
+}
+ */
+
+//Totry 0: Just to make sure if DPI import/export works, as well as whether C-side can call function on RTL side. 
+
+
 int sc_main(int argc, char** argv) {
         // Prevent unused variable warnings
         if (false && argc && argv) {}

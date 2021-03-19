@@ -46,3 +46,9 @@ function void setSoiValueSV(output int soi, output int val);
     getSoiValue(soi, val); // Arguments passed by copy
 endfunction
 //*/
+
+///* //toTry 0: Just to make sure if DPI import/export works, as well as whether C-side can call function on RTL side. 
+
+
+
+//*/
