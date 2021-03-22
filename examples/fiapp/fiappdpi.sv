@@ -40,7 +40,7 @@ endmodule
 
 task soiGetter(input din);
     /* verilator no_inline_task */
-    getSoiValue();
+    getSoiValue(din);
 endtask
 
 
