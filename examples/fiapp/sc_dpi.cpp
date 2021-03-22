@@ -22,12 +22,13 @@ If it is not, it can lead to unpredictable behaviour, even crash. Calling contex
 All export functions are always context functions." - Doulos tutorial
 */
 
- /* ToTry1:
-int getSoiValue(svlogic soi){ //imported over by SV side
 
+int getSoiValue(svlogic soi){ //imported over by SV side
+    cout << "SOI: " << int(soi); 
     return int(soi); 
 }
 
+/*
 void setSoiValue(svlogic soi, int val){ //imported over by SV side
 
 }
@@ -113,8 +114,8 @@ int sc_main(int argc, char** argv) {
                     enable = 1;  // Reassert enable
                 }
             }*/
-            svLogic value = 0; 
-            SetLogic(value, top->q1)
+            //svLogic value = 0; 
+            //SetLogic(value, top->q1)
 
             // Evaluates model & progresses clock by 1 ns
             sc_start(1, SC_NS); 

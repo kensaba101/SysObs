@@ -10,8 +10,8 @@ module fiappdpi
     output logic o3
 );
 
-    //import "DPI-C" function int getSoiValue (output int soi);
-    //import "DPI-C" function void setSoiValue (output int soi, input int val); 
+    import "DPI-C" context function void getSoiValue();
+    //import "DPI-C" function void setSoiValue(output int soi, input int val); 
     export "DPI-C" function SetLogic;
 
 
@@ -33,8 +33,15 @@ module fiappdpi
             end
             q2 <= q1; 
             q3 <= !q1; 
-    end
+        end
+    soiGetter(q1);
 endmodule
+
+task soiGetter(input din);
+    /* verilator no_inline_task */
+    getSoiValue();
+endtask
+
 
 /* //toTry 1: 
 function void getSoiValueSV(int soi);
@@ -50,12 +57,11 @@ endfunction
 
 
 //*/
+
+
+
+/* //doesn't work 
 function void SetLogic(input logic inLogic, output logic outLogic); //SetLogic(1,q1);   
     outLogic = inLogic; 
 endfunction
-
-///* //toTry 0: Just to make sure if DPI import/export works, as well as whether C-side can call function on RTL side. 
-
-
-
-//*/
+*/
