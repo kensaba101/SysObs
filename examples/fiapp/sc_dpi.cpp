@@ -11,7 +11,7 @@
 
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
-// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp --vpi -Wno-BLKANDNBLK  //!rdy
+// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp -Wno-BLKANDNBLK  //!rdy
 
 /*
 "An imported function that is intended to call exported functions or to access 
@@ -95,7 +95,7 @@ int sc_main(int argc, char** argv) {
         while (!Verilated::gotFinish()) { 
 
             // Apply control inputs on negedge, as reset and enable are sampled on posedge
-            if (!clk){
+            /*if (!clk){
                 if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
                     reset = 1;  // Assert reset
                 } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
@@ -110,7 +110,10 @@ int sc_main(int argc, char** argv) {
                     a = !a; 
                     enable = 1;  // Reassert enable
                 }
-            }
+            }*/
+            svLogic value = 0; 
+            SetLogic(value, q1)
+
             // Evaluates model & progresses clock by 1 ns
             sc_start(1, SC_NS); 
             //tprint: time, clk, reset, enable, a, o1, o2, o3
