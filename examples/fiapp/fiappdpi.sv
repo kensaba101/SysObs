@@ -26,6 +26,7 @@ module fiappdpi
             q1 <= 1'b0;
             q2 <= 1'b0;
             q3 <= 1'b0;
+            soiGetter(q1);
         end
         else begin
             if (enable) begin
@@ -33,8 +34,8 @@ module fiappdpi
             end
             q2 <= q1; 
             q3 <= !q1; 
+            soiGetter(q1);
         end
-    soiGetter(q1);
 endmodule
 
 task soiGetter(input din);
