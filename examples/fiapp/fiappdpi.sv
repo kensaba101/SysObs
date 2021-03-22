@@ -12,7 +12,7 @@ module fiappdpi
 
     //import "DPI-C" function int getSoiValue (output int soi);
     //import "DPI-C" function void setSoiValue (output int soi, input int val); 
-    export "DPI-C" function int SetLogic;
+    export "DPI-C" function SetLogic;
 
 
     logic q1, q2, q3; 
