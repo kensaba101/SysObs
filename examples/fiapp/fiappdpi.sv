@@ -29,7 +29,7 @@ module fiappdpi
             q1 <= 1'b0;
             q2 <= 1'b0;
             q3 <= 1'b0;
-            getSoiValue(q1);
+            $display("SOI = %0b",getSoiValue(q1)); 
         end
         else begin
             if (enable) begin
@@ -37,7 +37,7 @@ module fiappdpi
             end
             q2 <= q1; 
             q3 <= !q1; 
-            getSoiValue(q1);
+            //getSoiValue(q1);
         end
 endmodule
 

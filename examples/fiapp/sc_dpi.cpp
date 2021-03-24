@@ -25,6 +25,7 @@ All export functions are always context functions." - Doulos tutorial
 
 svLogic getSoiValue(const svLogic soiVal){ //imported over by SV side
    cout << "SOI: " << soiVal;
+   return soiVal; 
    //cout << "Test" << endl; 
 }
 
