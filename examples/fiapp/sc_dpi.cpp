@@ -23,10 +23,13 @@ All export functions are always context functions." - Doulos tutorial
 */
 
 
-void getSoiValue( ){ //imported over by SV side
-   // cout << "SOI: " << int(soi);
-   cout << "Test" << endl; 
+svLogic getSoiValue(const svLogic soiVal){ //imported over by SV side
+   cout << "SOI: " << soiVal;
+   //cout << "Test" << endl; 
 }
+
+void setSoiValue(const svLogic iValue, svLogic* oValue);
+
 
 /*
 void setSoiValue(svlogic soi, int val){ //imported over by SV side

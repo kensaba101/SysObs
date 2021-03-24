@@ -10,9 +10,12 @@ module fiappdpi
     output logic o3
 );
 
-    import "DPI-C" context function void getSoiValue();
+    import "DPI-C" function logic getSoiValue(input logic soiVal);
     //import "DPI-C" function void setSoiValue(output int soi, input int val); 
     //export "DPI-C" function SetLogic;
+    // Based on amiq.com:
+    //import "DPI-C" function void compute_logic(input logic i_value, output logic result);
+    //import "DPI-C" function logic get_logic(input logic i_value);
 
 
     logic q1, q2, q3; 
@@ -40,7 +43,7 @@ endmodule
 
 task soiGetter(input din);
     /* verilator no_inline_task */
-    getSoiValue();
+    getSoiValue(din);
 endtask
 
 
