@@ -38,7 +38,7 @@
                                         // what SystemC does
         }
 
-        int main(int argc, char** argv) {
+        int sc_main(int argc, char** argv) {
             Verilated::commandArgs(argc, argv);   // Remember args
 
             Vdpitest* top;
@@ -54,4 +54,5 @@
             top->final();               // Done simulating
             //    // (Though this example doesn't get here)
             //delete top;
+            return 0; 
         }
