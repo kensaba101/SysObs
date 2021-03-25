@@ -46,9 +46,9 @@
             //top = new Vdpitest;             // Create instance
 
           
-
+            sc_start(1, SC_NS); 
             while (!Verilated::gotFinish()) {
-            
+            sc_start(1, SC_NS); 
             }
 
             top->final();               // Done simulating
