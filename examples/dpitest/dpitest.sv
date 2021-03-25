@@ -7,7 +7,7 @@ module dpitest
     import "DPI-C" function int add (input int a, input int b);
     //export "DPI-C" function integer \$myRand;
     import "DPI-C" context function int dpic_line();
-   initial $display("This is line %d, again, line %d\n", `line, dpic_line());
+   initial $display("This is line %d, again, line %d\n", `__LINE__, dpic_line());
 
    //initial $display("myRand=%d", $myRand());
 /*
