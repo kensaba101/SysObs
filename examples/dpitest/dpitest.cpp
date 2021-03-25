@@ -8,7 +8,9 @@
     int add(int a, int b) { return a+b; }
 
        int dpic_line() {
-       // Get a scope:  svScope scope = svGetScope();
+       // Get a scope:  
+       
+       svScope scope = svGetScope();
 
        const char* scopenamep = svGetNameFromScope(scope);
        assert(scopenamep);
@@ -43,21 +45,10 @@
             top = new Vdpitest("top");
             //top = new Vdpitest;             // Create instance
 
-            top->reset_l = 0;           // Set some inputs
+          
 
             while (!Verilated::gotFinish()) {
-                if (main_time > 10) {
-                    top->reset_l = 1;   // Deassert reset
-                }
-                if ((main_time % 10) == 1) {
-                    top->clk = 1;       // Toggle clock
-                }
-                if ((main_time % 10) == 6) {
-                    top->clk = 0;
-                }
-                top->eval();            // Evaluate model
-                cout << top->out << endl;       // Read a output
-                main_time++;            // Time passes...
+            
             }
 
             top->final();               // Done simulating
