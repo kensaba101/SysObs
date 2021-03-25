@@ -29,24 +29,8 @@ svLogic getSoiValue(const svLogic soiVal){ //imported over by SV side
    //cout << "Test" << endl; 
 }
 
-void setSoiValue(const svLogic iValue, svLogic* oValue);
+//void setSoiValue(const svLogic iValue, svLogic* oValue);
 
-
-/*
-void setSoiValue(svlogic soi, int val){ //imported over by SV side
-
-}
-
-void callSetVal(){ //called by sim wrapper
-
-}
-
-void callGetVal(){ //called by sim wrapper
-
-}
- */
-
-//Totry 0: Just to make sure if DPI import/export works, as well as whether C-side can call function on RTL side. 
 
 
 int sc_main(int argc, char** argv) {

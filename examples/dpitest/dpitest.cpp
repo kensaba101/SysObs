@@ -6,6 +6,23 @@
     //publicSetBool(value);
 
     int add(int a, int b) { return a+b; }
+    
+       int dpic_line() {
+       // Get a scope:  svScope scope = svGetScope();
+
+       const char* scopenamep = svGetNameFromScope(scope);
+       assert(scopenamep);
+
+       const char* filenamep = "";
+       int lineno = 0;
+       if (svGetCallerInfo(&filenamep, &lineno)) {
+           printf("dpic_line called from scope %s on line %d\n",
+              scopenamep, lineno);
+           return lineno;
+       } else {
+           return 0;
+       }
+   }
 
         Vdpitest *dpitest;                      // Instantiation of module
 
