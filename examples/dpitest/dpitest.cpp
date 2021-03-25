@@ -6,7 +6,7 @@
     //publicSetBool(value);
 
     int add(int a, int b) { return a+b; }
-    
+
        int dpic_line() {
        // Get a scope:  svScope scope = svGetScope();
 
@@ -24,7 +24,7 @@
        }
    }
 
-        Vdpitest *dpitest;                      // Instantiation of module
+        //Vdpitest *dpitest;                      // Instantiation of module
 
         vluint64_t main_time = 0;       // Current simulation time
         // This is a 64-bit integer to reduce wrap over issues and
@@ -39,7 +39,9 @@
         int main(int argc, char** argv) {
             Verilated::commandArgs(argc, argv);   // Remember args
 
-            top = new Vdpitest;             // Create instance
+            Vdpitest* top;
+            top = new Vdpitest("top");
+            //top = new Vdpitest;             // Create instance
 
             top->reset_l = 0;           // Set some inputs
 
@@ -60,5 +62,5 @@
 
             top->final();               // Done simulating
             //    // (Though this example doesn't get here)
-            delete top;
+            //delete top;
         }
