@@ -9,7 +9,7 @@ module dpitest
     import "DPI-C" context function int dpic_line();
 
     import "DPI-C" context function logic getSoi(input logic soi); //input logic -> svLogic, output logic -> svlogic*
-    export "DPI-C" function getSoiSV(input logic soi); 
+    export "DPI-C" function getSoiSV; 
 
     //import "DPI-C" context function void setSoi(input logic value, output logic soi);
 
