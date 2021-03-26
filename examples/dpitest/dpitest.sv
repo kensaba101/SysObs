@@ -35,7 +35,7 @@ module dpitest
        /* verilator no_inline_task */
        return getSoi(soi);
     endfunction
-
+    
 
     //function setSoiSV(input logic value, output logic soi);
        /* veril//ator no_inl//ine_ta//sk */

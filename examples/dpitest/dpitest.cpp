@@ -51,15 +51,17 @@ void setSoi(svLogic value, svLogic* soi) {
             Vdpitest* top;
             top = new Vdpitest("top");
             sc_clock clk("clk", 2, SC_NS, 0.5, true);
+            svLogic testval; 
+            top->testval(testval);
             top->clk(clk); 
 
           
             sc_start(1, SC_NS); 
-            while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS) ) {
-            cout << "value of testval via getSoiSV: " << getSoiSV() << endl; 
-            cout << top->testval << endl;
+            while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
+                cout << "value of testval via getSoiSV: " << getSoiSV(testval) << endl; 
+                cout << testval << endl;
             
-            sc_start(1, SC_NS); 
+                sc_start(1, SC_NS); 
             }
 
             top->final();               // Done simulating
