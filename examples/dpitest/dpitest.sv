@@ -1,5 +1,5 @@
 module dpitest
-(    input logic clk, 
+(    input logic clk
 
 );
 
@@ -24,7 +24,9 @@ module dpitest
     end
 
     always_ff @(posedge clk){
-        testval <= !testval;
+        begin
+            testval <= !testval;
+        end
     }
 
     
