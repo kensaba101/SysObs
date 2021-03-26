@@ -23,11 +23,11 @@ module dpitest
         testval = 1'b1; 
     end
 
-    always_ff @(posedge clk){
+    always_ff @(posedge clk)
         begin
             testval <= !testval;
         end
-    }
+    
 
     
 
