@@ -4,31 +4,39 @@ module dpitest
 
     //import "DPI-C" function int getSoiValue (output int soi);
     //import "DPI-C" function void setSoiValue (output int soi, input int val); 
-    import "DPI-C" function int add (input int a, input int b);
+    //import "DPI-C" function int add (input int a, input int b);
     //export "DPI-C" function integer \$myRand;
     import "DPI-C" context function int dpic_line();
-   initial $display("This is line %d, again, line %d\n", `__LINE__, dpic_line());
 
-   //initial $display("myRand=%d", $myRand());
-/*
-    export "DPI-C" task publicSetBool;
+    import "DPI-C" context function logic getSoi(input logic soi); //input logic -> svLogic, output logic -> svlogic*
+    export "DPI-C" function getSoiSV(input logic soi); 
+
+    //import "DPI-C" context function void setSoi(input logic value, output logic soi);
+
+    //initial $display("This is line %d, again, line %d\n", `__LINE__, dpic_line());
+
+
     logic testval; 
-    bit var_bool; 
-
-   task publicSetBool;
-      input bit in_bool;
-      var_bool = in_bool;
-   endtask
 
 
 
     
     initial begin
         testval = 1; 
-        $display("%x + %x = %x", 1, 2, add(1,2));
     end
 
     
-*/
+
+    function getSoiSV(input logic soi);
+       /* verilator no_inline_task */
+       getSoi(soi);
+    endfunction
+
+
+    //function setSoiSV(input logic value, output logic soi);
+       /* verilator no_inline_task */
+    //   setSoi(soi);
+    //endfunction
+
 
 endmodule

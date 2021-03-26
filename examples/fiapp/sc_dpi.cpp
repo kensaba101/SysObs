@@ -13,7 +13,7 @@
 
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
-// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp -Wno-BLKANDNBLK  //!rdy
+// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp --Mdir obj_vpi -Wno-BLKANDNBLK  
 
 /*
 "An imported function that is intended to call exported functions or to access 

@@ -1,15 +1,13 @@
 #include <verilated.h>          // Defines common routines
-        #include <iostream>             // Need std::cout
-        #include "Vdpitest.h"               // From Verilating "top.v"
-        #include "svdpi.h"
-    #include "Vdpitest__Dpi.h"
-    //publicSetBool(value);
+#include <iostream>             // Need std::cout
+#include "Vdpitest.h"               // From Verilating "top.v"
+#include "svdpi.h"
+#include "Vdpitest__Dpi.h"
 
-    int add(int a, int b) { return a+b; }
+int add(int a, int b) { return a+b; }
 
-       int dpic_line() {
+       int dpic_line() { //works
        // Get a scope:  
-       
        svScope scope = svGetScope();
 
        const char* scopenamep = svGetNameFromScope(scope);
@@ -25,6 +23,15 @@
            return 0;
        }
    }
+
+svLogic getSoi(const svLogic soi) {
+    return soi;
+}
+
+/*
+void setSoi(svLogic value, svLogic* soi) { 
+    *soi = value; 
+} */
 
         //Vdpitest *dpitest;                      // Instantiation of module
 
@@ -43,16 +50,16 @@
 
             Vdpitest* top;
             top = new Vdpitest("top");
-            //top = new Vdpitest;             // Create instance
 
           
             sc_start(1, SC_NS); 
             while (!Verilated::gotFinish()) {
+            cout << "value of testval via getSoiSV: " << getSoiSV() << endl; 
+            cout << top->testval << endl;
+            
             sc_start(1, SC_NS); 
             }
 
             top->final();               // Done simulating
-            //    // (Though this example doesn't get here)
-            //delete top;
             return 0; 
         }
