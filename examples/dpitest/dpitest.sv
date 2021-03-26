@@ -34,7 +34,7 @@ module dpitest
 
 
     //function setSoiSV(input logic value, output logic soi);
-       /* verilator no_inline_task */
+       /* veril//ator no_inl//ine_ta//sk */
     //   setSoi(soi);
     //endfunction
 
