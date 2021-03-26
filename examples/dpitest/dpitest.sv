@@ -1,5 +1,6 @@
 module dpitest
-(
+(    input logic clk, 
+
 );
 
     //import "DPI-C" function int getSoiValue (output int soi);
@@ -18,18 +19,19 @@ module dpitest
 
     logic testval; 
 
-
-
-    
     initial begin
-        testval = 1; 
+        testval = 1'b1; 
     end
+
+    always_ff @(posedge clk){
+        testval <= !testval;
+    }
 
     
 
     function getSoiSV(input logic soi);
        /* verilator no_inline_task */
-       getSoi(soi);
+       return getSoi(soi);
     endfunction
 
 
