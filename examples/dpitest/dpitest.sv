@@ -8,8 +8,8 @@ module dpitest
     //import "DPI-C" function int add (input int a, input int b);
     //export "DPI-C" function integer \$myRand;
     import "DPI-C" context function int dpic_line();
-    import "DPI-C" context function void testValRead1(int testvalVal);
-    import "DPI-C" context function void testValRead0(int testvalVal);
+    import "DPI-C" context function void testValRead1();
+    import "DPI-C" context function void testValRead0();
 
     //import "DPI-C" context function logic getSoiHandle(input logic soi); //input logic -> svLogic, output logic -> svlogic*
     //export "DPI-C" function sendTvHandle; 
@@ -47,10 +47,10 @@ module dpitest
         //call import here to send value over to c-side (read) 
         if (testval == 1'b1) begin
             $display ("sv function getTestval called, calling c import testvalread1: ");
-            testValRead1(testvalVal);
+            testValRead1();
         end else begin
             $display ("sv function getTestval called, calling c import testvalread0: ");
-            testValRead0(testvalVal);
+            testValRead0();
         end
     endfunction
 
