@@ -24,11 +24,11 @@ int dpic_line() { //works
 }
 
 //imports, called on sv side. 
-void testValRead1(){
+void testValRead1(int testvalVal){
     cout << "testValRead1 form c called.";
     testvalVal = 1; 
 }
-void testValRead0(){
+void testValRead0(int testvalVal){
     cout << "testValRead0 form c called.";
     testvalVal = 2; 
 } 
