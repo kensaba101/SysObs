@@ -7,13 +7,10 @@ module dpitest
     //import "DPI-C" function void setSoiValue (output int soi, input int val); 
     //import "DPI-C" function int add (input int a, input int b);
     //export "DPI-C" function integer \$myRand;
-    import "DPI-C" context function int dpic_line();
+    //import "DPI-C" context function int dpic_line();
     import "DPI-C" context function void testValRead1();
     import "DPI-C" context function void testValRead0();
 
-    //import "DPI-C" context function logic getSoiHandle(input logic soi); //input logic -> svLogic, output logic -> svlogic*
-    //export "DPI-C" function sendTvHandle; 
-    //export "DPI-C" function setTestval; 
     export "DPI-C" function getTestval; 
     export "DPI-C" function setTestval1; 
     export "DPI-C" function setTestval0; 
@@ -35,13 +32,7 @@ module dpitest
             testval <= !testval;
         end
 
-    /*
-    function setTestval;
-        input logic inLogic; 
-        testval <= inLogic; 
-    endfunction 
-    */
-    
+ 
     function getTestval();
         //$display (" Clk: %d, Testval : %d", clk, testval); //works
         //call import here to send value over to c-side (read) 
