@@ -28,7 +28,7 @@ module dpitest
 
     always_ff @(posedge clk)
         begin
-            testval <= !testval;
+            testval = !testval;
         end
 
 
@@ -37,12 +37,18 @@ module dpitest
         testval = inLogic; 
     endtask
     
+    function getTestval(output logic tv);
+        tv = testval; 
+    endfunction
+
+    /*
     function logic getTestval;
         return testval;
-    endfunction
+    endfunction 
+    */
     
    /* task getTestval;    
-        $display ("Testval :", testval);
+        $display ("Testval : %d", testval);
 
         //return testval; 
     endtask */

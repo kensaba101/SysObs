@@ -51,8 +51,8 @@ if (svGetCallerInfo(&filenamep, &lineno)) {
             svSetScope(svGetScopeFromName("top.dpitest"));
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
                 //cout << "value of testval address: " << testvalPtr << endl; 
-                testvalVal = getTestval(); 
-                cout << "value of testval: " << (int)testvalVal<< endl;
+                getTestval(testvalVal); 
+                cout << "value of testval: " << (int)testvalVal << endl;
 
                 //cout << testval << endl;
             
