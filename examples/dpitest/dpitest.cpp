@@ -24,14 +24,7 @@ int add(int a, int b) { return a+b; }
        }
    }
 
-svLogic getSoi(const svLogic soi) {
-    return soi;
-}
 
-/*
-void setSoi(svLogic value, svLogic* soi) { 
-    *soi = value; 
-} */
 
         //Vdpitest *dpitest;                      // Instantiation of module
 
@@ -40,26 +33,25 @@ void setSoi(svLogic value, svLogic* soi) {
         // allow modulus.  This is in units of the timeprecision
         // used in Verilog (or from --timescale-override)
 
-        double sc_time_stamp () {       // Called by $time in Verilog
-            return main_time;           // converts to double, to match
-                                        // what SystemC does
-        }
 
-        int sc_main(int argc, char** argv) {
+
+        int sc_main(int argc, char** argv) {    
             Verilated::commandArgs(argc, argv);   // Remember args
 
             Vdpitest* top;
             top = new Vdpitest("top");
             sc_clock clk("clk", 2, SC_NS, 0.5, true);
-            svLogic testval; 
+            svLogic* testvalPtr; 
+            testvalPtr = sendTvHandle(); 
             top->testval(testval);
             top->clk(clk); 
 
           
             sc_start(1, SC_NS); 
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
-                cout << "value of testval via getSoiSV: " << getSoiSV(testval) << endl; 
-                cout << testval << endl;
+                cout << "value of testval address: " << testvalPtr << endl; 
+                cout << "value of testval: " << *testvalPtr << endl;
+                //cout << testval << endl;
             
                 sc_start(1, SC_NS); 
             }

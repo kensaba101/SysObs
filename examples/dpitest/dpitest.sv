@@ -9,8 +9,8 @@ module dpitest
     //export "DPI-C" function integer \$myRand;
     import "DPI-C" context function int dpic_line();
 
-    import "DPI-C" context function logic getSoi(input logic soi); //input logic -> svLogic, output logic -> svlogic*
-    export "DPI-C" function getSoiSV; 
+    //import "DPI-C" context function logic getSoiHandle(input logic soi); //input logic -> svLogic, output logic -> svlogic*
+    export "DPI-C" function sendTvHandle; 
 
     //import "DPI-C" context function void setSoi(input logic value, output logic soi);
 
@@ -21,6 +21,7 @@ module dpitest
 
     initial begin
         testval = 1'b1; 
+        //getSoiHandle(testval);
     end
 
     always_ff @(posedge clk)
@@ -31,11 +32,11 @@ module dpitest
 
     
 
-    function getSoiSV(input logic soi);
-       /* verilator no_inline_task */
-       return getSoi(soi);
+
+    function sendTvHandle(output logic soi);
+       return testval;
     endfunction
-    
+
 
     //function setSoiSV(input logic value, output logic soi);
        /* veril//ator no_inl//ine_ta//sk */
