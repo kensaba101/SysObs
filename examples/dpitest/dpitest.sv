@@ -13,6 +13,8 @@ module dpitest
     //export "DPI-C" function sendTvHandle; 
     //export "DPI-C" function setTestval; 
     export "DPI-C" function getTestval; 
+    export "DPI-C" function setTestval1; 
+    //export "DPI-C" function setTestval0; 
 
     //import "DPI-C" context function void setSoi(input logic value, output logic soi);
 
@@ -39,9 +41,23 @@ module dpitest
     */
     
     function getTestval();
-        $display ("Testval : %d", testval);
-        //tv = testval; 
+        $display (" Clk: %d, Testval : %d", clk, testval); //works
+        //call import here to send value over to c-side (read) 
     endfunction
+
+    function setTestval1();
+        $display (" Clk: %d, Testval : %d", clk, testval);
+        testval = 1;
+        $display (" Clk: %d, Testval : %d", clk, testval);
+    endfunction
+
+    /*
+    function setTestval0(); 
+        $display (" Clk: %d, Testval : %d", clk, testval);
+        testval = 0; 
+        $display (" Clk: %d, Testval : %d", clk, testval);
+    endfunction
+    */
 
     /*
     function logic getTestval;

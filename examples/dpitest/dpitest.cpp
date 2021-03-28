@@ -41,20 +41,15 @@ if (svGetCallerInfo(&filenamep, &lineno)) {
             Vdpitest* top;
             top = new Vdpitest("top");
             sc_clock clk("clk", 2, SC_NS, 0.5, true);
-            //svLogic* testvalPtr; 
-            //sendTvHandle(testvalPtr); 
-            //top->testval(testval);
             top->clk(clk); 
-
-            //svLogic* testvalVal;     
+            svLogic test = 1; 
             sc_start(1, SC_NS); 
             svSetScope(svGetScopeFromName("top.dpitest"));
+            cout << "svLogic print test" << test << endl; 
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
                 //cout << "value of testval address: " << testvalPtr << endl; 
                 getTestval(); 
-                //cout << "value of testval: " << testvalVal << endl;
-
-                //cout << testval << endl;
+                setTestval1(); 
             
                 sc_start(1, SC_NS); 
             }
