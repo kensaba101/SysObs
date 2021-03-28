@@ -46,7 +46,7 @@ if (svGetCallerInfo(&filenamep, &lineno)) {
             //top->testval(testval);
             top->clk(clk); 
 
-            svLogic testvalVal;     
+            svLogic* testvalVal;     
             sc_start(1, SC_NS); 
             svSetScope(svGetScopeFromName("top.dpitest"));
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
