@@ -38,9 +38,9 @@ module dpitest
     endfunction 
     */
     
-    function getTestval(output logic tv);
+    function getTestval();
         $display ("Testval : %d", testval);
-        tv = testval; 
+        //tv = testval; 
     endfunction
 
     /*
