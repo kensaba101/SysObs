@@ -22,22 +22,23 @@ module dpitest
     logic testval; 
 
     initial begin
-        testval = 1'b1; 
+        testval <= 1'b1; 
         //getSoiHandle(testval);
     end
 
     always_ff @(posedge clk)
         begin
-            testval = !testval;
+            testval <= !testval;
         end
 
 
     task setTestval;
         input logic inLogic; 
-        testval = inLogic; 
+        testval <= inLogic; 
     endtask
     
     function getTestval(output logic tv);
+        $display ("Testval : %d", testval);
         tv = testval; 
     endfunction
 
