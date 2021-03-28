@@ -48,7 +48,7 @@ int add(int a, int b) { return a+b; }
 
           
             sc_start(1, SC_NS); 
-            svSetScope(svGetScopeFromName("top.fiappdpi"))
+            svSetScope(svGetScopeFromName("top.fiappdpi"));
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
                 //cout << "value of testval address: " << testvalPtr << endl; 
                 cout << "value of testval: " << getTestval() << endl;
