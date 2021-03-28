@@ -58,7 +58,7 @@ int sc_main(int argc, char** argv) {
     while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
         //cout << "value of testval address: " << testvalPtr << endl; 
         getTestval(); 
-        cout << "Value of testvalVal on c side is:" << testvalVal << endl;
+        cout << "clk: " << clk << "testval(sv): " << testvalVal << endl;
         setTestval1(); 
             
         sc_start(1, SC_NS); 
