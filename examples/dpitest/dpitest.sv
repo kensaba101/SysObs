@@ -37,9 +37,14 @@ module dpitest
         testval = inLogic; 
     endtask
     
-    task getTestval;
-        return testval; 
+    
+    task getTestval;    
+        $display ("Testval :", testval);
+
+        //return testval; 
     endtask
+    
+
 
     /*
     function sendTvHandle(output logic soi);
