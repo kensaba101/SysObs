@@ -41,16 +41,18 @@ int add(int a, int b) { return a+b; }
             Vdpitest* top;
             top = new Vdpitest("top");
             sc_clock clk("clk", 2, SC_NS, 0.5, true);
-            svLogic* testvalPtr; 
-            testvalPtr = sendTvHandle(); 
-            top->testval(testval);
+            //svLogic* testvalPtr; 
+            //sendTvHandle(testvalPtr); 
+            //top->testval(testval);
             top->clk(clk); 
 
           
             sc_start(1, SC_NS); 
+            svSetScope(svGetScopeFromName("top.fiappdpi"))
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
-                cout << "value of testval address: " << testvalPtr << endl; 
-                cout << "value of testval: " << *testvalPtr << endl;
+                //cout << "value of testval address: " << testvalPtr << endl; 
+                cout << "value of testval: " << getTestval() << endl;
+
                 //cout << testval << endl;
             
                 sc_start(1, SC_NS); 

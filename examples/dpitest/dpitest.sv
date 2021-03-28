@@ -10,7 +10,9 @@ module dpitest
     import "DPI-C" context function int dpic_line();
 
     //import "DPI-C" context function logic getSoiHandle(input logic soi); //input logic -> svLogic, output logic -> svlogic*
-    export "DPI-C" function sendTvHandle; 
+    //export "DPI-C" function sendTvHandle; 
+    export "DPI-C" task setTestval; 
+    export "DPI-C" task getTestval; 
 
     //import "DPI-C" context function void setSoi(input logic value, output logic soi);
 
@@ -28,14 +30,22 @@ module dpitest
         begin
             testval <= !testval;
         end
+
+
+    task setTestval;
+        input logic inLogic; 
+        testval = inLogic; 
+    endtask
     
+    task getTestval;
+        return testval; 
+    endtask
 
-    
-
-
+    /*
     function sendTvHandle(output logic soi);
-       return testval;
+       soi = testval;
     endfunction
+    */
 
 
     //function setSoiSV(input logic value, output logic soi);
