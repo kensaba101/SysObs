@@ -11,7 +11,7 @@ module dpitest
 
     //import "DPI-C" context function logic getSoiHandle(input logic soi); //input logic -> svLogic, output logic -> svlogic*
     //export "DPI-C" function sendTvHandle; 
-    export "DPI-C" task setTestval; 
+    export "DPI-C" function setTestval; 
     export "DPI-C" function getTestval; 
 
     //import "DPI-C" context function void setSoi(input logic value, output logic soi);
@@ -22,7 +22,7 @@ module dpitest
     logic testval; 
 
     initial begin
-        testval <= 1'b1; 
+        testval = 1'b1; 
         //getSoiHandle(testval);
     end
 
@@ -32,10 +32,10 @@ module dpitest
         end
 
 
-    task setTestval;
+    function setTestval;
         input logic inLogic; 
-        testval <= inLogic; 
-    endtask
+        testval = inLogic; 
+    endfunction
     
     function getTestval(output logic tv);
         $display ("Testval : %d", testval);
