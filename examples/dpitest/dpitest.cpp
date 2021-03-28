@@ -6,23 +6,23 @@
 
 int add(int a, int b) { return a+b; }
 
-       int dpic_line() { //works
-       // Get a scope:  
-       svScope scope = svGetScope();
+int dpic_line() { //works
+// Get a scope:  
+svScope scope = svGetScope();
 
-       const char* scopenamep = svGetNameFromScope(scope);
-       assert(scopenamep);
+const char* scopenamep = svGetNameFromScope(scope);
+assert(scopenamep);
 
-       const char* filenamep = "";
-       int lineno = 0;
-       if (svGetCallerInfo(&filenamep, &lineno)) {
-           printf("dpic_line called from scope %s on line %d\n",
-              scopenamep, lineno);
-           return lineno;
-       } else {
-           return 0;
-       }
-   }
+const char* filenamep = "";
+int lineno = 0;
+if (svGetCallerInfo(&filenamep, &lineno)) {
+    printf("dpic_line called from scope %s on line %d\n",
+        scopenamep, lineno);
+    return lineno;
+} else {
+    return 0;
+}
+}
 
 
 
@@ -46,12 +46,13 @@ int add(int a, int b) { return a+b; }
             //top->testval(testval);
             top->clk(clk); 
 
-          
+            svLogic testvalVal;     
             sc_start(1, SC_NS); 
             svSetScope(svGetScopeFromName("top.fiappdpi"));
             while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
                 //cout << "value of testval address: " << testvalPtr << endl; 
-                cout << "value of testval: " << getTestval() << endl;
+                testvalVal = getTestval(); 
+                cout << "value of testval: " << testvalVal<< endl;
 
                 //cout << testval << endl;
             
