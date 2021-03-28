@@ -46,16 +46,16 @@ module dpitest
     endfunction
 
     function setTestval1();
-        $display (" Clk: %d, Testval : %d", clk, testval);
+        //$display (" Clk: %d, Testval : %d", clk, testval);
         testval = 1;
-        $display (" Clk: %d, Testval : %d", clk, testval);
+        //$display (" Clk: %d, Testval : %d", clk, testval);
     endfunction
 
     
     function setTestval0(); 
-        $display (" Clk: %d, Testval : %d", clk, testval);
+        //$display (" Clk: %d, Testval : %d", clk, testval);
         testval = 0; 
-        $display (" Clk: %d, Testval : %d", clk, testval);
+        //$display (" Clk: %d, Testval : %d", clk, testval);
     endfunction
     
 

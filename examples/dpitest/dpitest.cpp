@@ -32,7 +32,7 @@ void testValRead1(){
 }
 void testValRead0(){
     cout << "testValRead0 form c called." << endl;
-    testvalVal = 2; 
+    testvalVal = 0; 
 } 
 
 vluint64_t main_time = 0;       // Current simulation time
@@ -58,6 +58,7 @@ int sc_main(int argc, char** argv) {
     while (!Verilated::gotFinish() && (sc_time_stamp() < sc_time(50, SC_NS)) ) {
         //cout << "value of testval address: " << testvalPtr << endl; 
         getTestval(); 
+        cout << "Value of testvalVal on c side is:" << testvalVal << endl;
         setTestval1(); 
             
         sc_start(1, SC_NS); 
