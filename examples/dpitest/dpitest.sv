@@ -37,10 +37,10 @@ module dpitest
         //$display (" Clk: %d, Testval : %d", clk, testval); //works
         //call import here to send value over to c-side (read) 
         if (testval == 1'b1) begin
-            $display ("sv function getTestval called, calling c import testvalread1: ");
+            //$display ("sv function getTestval called, calling c import testvalread1: ");
             testValRead1();
         end else begin
-            $display ("sv function getTestval called, calling c import testvalread0: ");
+            //$display ("sv function getTestval called, calling c import testvalread0: ");
             testValRead0();
         end
     endfunction

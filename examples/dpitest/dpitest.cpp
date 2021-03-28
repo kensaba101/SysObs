@@ -27,11 +27,11 @@ int dpic_line() { //works
 int testvalVal; 
 
 void testValRead1(){
-    cout << "testValRead1 form c called." << endl;
+    //cout << "testValRead1 form c called." << endl;
     testvalVal = 1; 
 }
 void testValRead0(){
-    cout << "testValRead0 form c called." << endl;
+    //cout << "testValRead0 form c called." << endl;
     testvalVal = 0; 
 } 
 
@@ -60,7 +60,9 @@ int sc_main(int argc, char** argv) {
         getTestval(); 
         cout << "clk: " << clk << "testval(sv): " << testvalVal << endl;
         setTestval1(); 
-            
+        getTestval(); 
+        cout << "clk: " << clk << "testval(sv): " << testvalVal << endl;
+    
         sc_start(1, SC_NS); 
     }
 
