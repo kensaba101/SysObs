@@ -24,6 +24,8 @@ int dpic_line() { //works
 }
 
 //imports, called on sv side. 
+int testvalVal; 
+
 void testValRead1(){
     cout << "testValRead1 form c called.";
     testvalVal = 1; 
@@ -41,17 +43,10 @@ vluint64_t main_time = 0;       // Current simulation time
 
 
 int sc_main(int argc, char** argv) {    
-    void testValRead1(){
-        cout << "testValRead1 form c called.";
-        testvalVal = 1; 
-    }
-    void testValRead0(){
-        cout << "testValRead0 form c called.";
-        testvalVal = 0; 
-    } 
+
 
     Verilated::commandArgs(argc, argv);   // Remember args
-    int testvalVal; 
+    
     Vdpitest* top;
     top = new Vdpitest("top");
     sc_clock clk("clk", 2, SC_NS, 0.5, true);
