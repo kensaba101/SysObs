@@ -13,7 +13,7 @@
 
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
-// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp --Mdir obj_vpi -Wno-BLKANDNBLK  
+// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp --Mdir obj_dpi -Wno-BLKANDNBLK  
 
 /*
 "An imported function that is intended to call exported functions or to access 
@@ -22,16 +22,29 @@ If it is not, it can lead to unpredictable behaviour, even crash. Calling contex
 All export functions are always context functions." - Doulos tutorial
 */
 
-
-svLogic getSoiValue(const svLogic soiVal){ //imported over by SV side
-   cout << "SOI: " << soiVal;
-   return soiVal; 
-   //cout << "Test" << endl; 
+int q1val; 
+void q1read1(){
+    q1val = 1; 
 }
+void q1read0(){
+    q1val = 0; 
+} 
 
-//void setSoiValue(const svLogic iValue, svLogic* oValue);
+int q2val; 
+void q2read1(){
+    q2val = 1; 
+}
+void q2read0(){
+    q2val = 0; 
+} 
 
-
+int q3val; 
+void q3read1(){
+    q3val = 1; 
+}
+void q3read0(){
+    q3val = 0; 
+} 
 
 int sc_main(int argc, char** argv) {
         // Prevent unused variable warnings
@@ -86,7 +99,7 @@ int sc_main(int argc, char** argv) {
         while (!Verilated::gotFinish()) { 
 
             // Apply control inputs on negedge, as reset and enable are sampled on posedge
-            /*if (!clk){
+            iif (!clk){
                 if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
                     reset = 1;  // Assert reset
                 } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
@@ -96,20 +109,35 @@ int sc_main(int argc, char** argv) {
                     reset = 0;  // Deassert reset
                     a = !a; 
                     enable = 0; // Deassert enable
-                } else if (sc_time_stamp() >= sc_time(30, SC_NS) && sc_time_stamp() < sc_time(40, SC_NS)){
+                    
+                } else if (sc_time_stamp() >= sc_time(30, SC_NS) && sc_time_stamp() < sc_time(50, SC_NS)){
                     reset = 0;  // Deassert reset
                     a = !a; 
                     enable = 1;  // Reassert enable
                 }
-            }*/
-            //svLogic value = 0; 
-            //SetLogic(value, top->q1)
+            } 
 
+            if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
+                //setq1Val1(); 
+                setq2Val1; 
+                setq3val1(); 
+            }
+
+            getq1Val(); getq2Val(); getq3Val(); 
+
+            cout << "q1, q2, q3 before calling sc_start(): " << endl; 
+            cout << q1val << q2val <<  q3val << endl;
+            cout << "o1, o2, o3 before calling sc_start(): " << endl;
+            cout << o1 << o2 << o3 << endl; 
             // Evaluates model & progresses clock by 1 ns
-            sc_start(1, SC_NS); 
-            //tprint: time, clk, reset, enable, a, o1, o2, o3
+            sc_start(1, SC_NS);
+            
+            cout << "q1, q2, q3 after calling sc_start()" << endl; 
+            cout << q1val << q2val <<  q3val << endl;
+            cout << "o1, o2, o3 after calling sc_start(): " << endl;
+            cout << o1 << o2 << o3 << endl; 
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
-                << " o2=" << o2 << " o3=" << o3 << endl; 
+                << " o2=" << o2 << " o3=" << o3 << endl << endl;
 
             if(sc_time_stamp() > sc_time(SIMULATE_UNTIL_TIME, SC_NS) ){
                 break;
@@ -117,6 +145,5 @@ int sc_main(int argc, char** argv) {
         }
 
         top->final();    
-        //delete top;
         return 0;
 }
