@@ -99,7 +99,7 @@ int sc_main(int argc, char** argv) {
         while (!Verilated::gotFinish()) { 
 
             // Apply control inputs on negedge, as reset and enable are sampled on posedge
-            iif (!clk){
+            if (!clk){
                 if (sc_time_stamp() > sc_time(1, SC_NS) && sc_time_stamp() < sc_time(10, SC_NS)) {
                     reset = 1;  // Assert reset
                 } else if (sc_time_stamp() >= sc_time(10, SC_NS) && sc_time_stamp() < sc_time(20, SC_NS)){
@@ -119,8 +119,8 @@ int sc_main(int argc, char** argv) {
 
             if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
                 //setq1Val1(); 
-                setq2Val1; 
-                setq3val1(); 
+                setq2Val1(); 
+                setq3Val1(); 
             }
 
             getq1Val(); getq2Val(); getq3Val(); 
