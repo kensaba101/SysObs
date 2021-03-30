@@ -95,6 +95,7 @@ int sc_main(int argc, char** argv) {
         
         // Initialize SC model
         sc_start(1, SC_NS);
+        svSetScope(svGetScopeFromName("top.fiappdpi"));
 
         while (!Verilated::gotFinish()) { 
 
