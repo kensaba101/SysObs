@@ -5,14 +5,10 @@
 #include "Vdpitest__Dpi.h"
 
 int testvalVal; 
-
-//imports, called on sv side. 
 void testValRead1(){
-    //cout << "testValRead1 form c called." << endl;
     testvalVal = 1; 
 }
 void testValRead0(){
-    //cout << "testValRead0 form c called." << endl;
     testvalVal = 0; 
 } 
 
