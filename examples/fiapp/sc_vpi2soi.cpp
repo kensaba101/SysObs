@@ -1,37 +1,28 @@
 #include <systemc.h>
 #include <verilated.h>
-#include "Vfiappdpi__Dpi.h"
-#include "Vfiappdpi.h"
-#include "svdpi.h"
+#include "verilated_vpi.h" 
+#include "Vfiappvpi.h" 
 
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
-// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp --Mdir obj_dpi -Wno-BLKANDNBLK  
+// verilator -Wall --sc fiappvpi.sv --exe --build sc_vpi.cpp --vpi --Mdir obj_vpi2soi -Wno-BLKANDNBLK 
 
-
-int q1val; 
-void q1read1(){
-    q1val = 1; 
-}
-void q1read0(){
-    q1val = 0; 
-} 
-
+int q1val;
 int q2val; 
-void q2read1(){
-    q2val = 1; 
-}
-void q2read0(){
-    q2val = 0; 
-} 
 
-int q3val; 
-void q3read1(){
-    q3val = 1; 
+int getSoiValue(vpiHandle vh) { 
+    s_vpi_value v; 
+    v.format = vpiIntVal; 
+    vpi_get_value(vh, &v);
+    return v.value.integer; 
 }
-void q3read0(){
-    q3val = 0; 
-} 
+
+void setSoiValue(vpiHandle vh, int i) {
+    s_vpi_value v; 
+    v.format = vpiIntVal; 
+    v.value.integer = i; 
+    vpi_put_value(vh, &v, 0, vpiForceFlag);   
+}
 
 int sc_main(int argc, char** argv) {
         sc_core::sc_report_handler::set_actions( "/IEEE_Std_1666/deprecated", sc_core::SC_DO_NOTHING ); // Ignore warnings about IEEE deprecated features.
@@ -48,16 +39,14 @@ int sc_main(int argc, char** argv) {
         sc_signal<bool> o2;
         sc_signal<bool> o3;
 
-        Vfiappdpi* top;
-        top = new Vfiappdpi("top");
+        Vfiappvpi* top; 
+        top = new Vfiappvpi("top");
 
         // Attach signals to the model
         top->clk(clk); 
-
         top->reset(reset);
         top->a(a);
         top->enable(enable);
-
         top->o1(o1);
         top->o2(o2);
         top->o3(o3);
@@ -69,8 +58,9 @@ int sc_main(int argc, char** argv) {
         
         // Initialize SC model
         sc_start(1, SC_NS);
-        svSetScope(svGetScopeFromName("top.fiappdpi"));
 
+        vpiHandle vhq1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL); //instanceName.moduleName.signalName
+        vpiHandle vhq2 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q2", NULL); 
         while (!Verilated::gotFinish()) { 
 
             // Apply control inputs on negedge, as reset and enable are sampled on posedge
@@ -91,26 +81,24 @@ int sc_main(int argc, char** argv) {
                     enable = 1;  // Reassert enable
                 }
             } 
-
+            
             if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
-                setq1Val1(); 
-                setq2Val1(); 
-                setq3Val1(); 
+                setSoiValue(vhq1, 1); 
+                setSoiValue(vhq2, 1);
             }
 
-            getq1Val(); 
-            getq2Val(); 
-            getq3Val(); 
-
-            cout << "q1, q2, q3 before calling sc_start(): " << endl; 
-            cout << q1val << q2val <<  q3val << endl;
+            q1val = getSoiValue(vhq1);
+            q2val = getSoiValue(vhq2); 
+        
+            cout << "q1, q2 before calling sc_start(): " << endl; 
+            cout << q1val << q2val << endl;
             cout << "o1, o2, o3 before calling sc_start(): " << endl;
             cout << o1 << o2 << o3 << endl; 
 
             sc_start(1, SC_NS); // Evaluates model & progresses clock by 1 ns
             
-            cout << "q1, q2, q3 after calling sc_start()" << endl; 
-            cout << q1val << q2val <<  q3val << endl;
+            cout << "q1, q2 after calling sc_start(): " << endl; 
+            cout << q1val << q2val << endl;
             cout << "o1, o2, o3 after calling sc_start(): " << endl;
             cout << o1 << o2 << o3 << endl; 
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 

@@ -26,6 +26,7 @@ void setSoiValue(vpiHandle vh, int i) {
 }
 
 int sc_main(int argc, char** argv) {
+        sc_core::sc_report_handler::set_actions( "/IEEE_Std_1666/deprecated", sc_core::SC_DO_NOTHING ); // Ignore warnings about IEEE deprecated features.
         if (false && argc && argv) {}
         Verilated::debug(0);
         Verilated::randReset(2);
@@ -62,7 +63,6 @@ int sc_main(int argc, char** argv) {
         vpiHandle vhq1 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q1", NULL); //instanceName.moduleName.signalName
         vpiHandle vhq2 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q2", NULL); 
         vpiHandle vhq3 = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.q3", NULL); 
-        vpiHandle vha = vpi_handle_by_name((PLI_BYTE8*)"top.fiappvpi.a", NULL); 
         while (!Verilated::gotFinish()) { 
 
             // Apply control inputs on negedge, as reset and enable are sampled on posedge
@@ -85,7 +85,7 @@ int sc_main(int argc, char** argv) {
             } 
             
             if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
-                //setSoiValue(vhq1, 1); 
+                setSoiValue(vhq1, 1); 
                 setSoiValue(vhq2, 1);
                 setSoiValue(vhq3, 1); 
             }

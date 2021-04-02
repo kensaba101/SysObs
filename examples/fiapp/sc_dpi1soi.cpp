@@ -6,7 +6,7 @@
 
 #define SIMULATE_UNTIL_TIME 50
 // call verilator using: 
-// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi.cpp --Mdir obj_dpi -Wno-BLKANDNBLK  
+// verilator -Wall --sc fiappdpi.sv --exe --build sc_dpi1soi.cpp --Mdir obj_dpi1soi -Wno-BLKANDNBLK  
 
 
 int q1val; 
@@ -17,21 +17,7 @@ void q1read0(){
     q1val = 0; 
 } 
 
-int q2val; 
-void q2read1(){
-    q2val = 1; 
-}
-void q2read0(){
-    q2val = 0; 
-} 
 
-int q3val; 
-void q3read1(){
-    q3val = 1; 
-}
-void q3read0(){
-    q3val = 0; 
-} 
 
 int sc_main(int argc, char** argv) {
         sc_core::sc_report_handler::set_actions( "/IEEE_Std_1666/deprecated", sc_core::SC_DO_NOTHING ); // Ignore warnings about IEEE deprecated features.
@@ -94,23 +80,21 @@ int sc_main(int argc, char** argv) {
 
             if (sc_time_stamp() >= sc_time(33,SC_NS) && sc_time_stamp() < sc_time(43,SC_NS)){
                 setq1Val1(); 
-                setq2Val1(); 
-                setq3Val1(); 
+ 
             }
 
             getq1Val(); 
-            getq2Val(); 
-            getq3Val(); 
 
-            cout << "q1, q2, q3 before calling sc_start(): " << endl; 
-            cout << q1val << q2val <<  q3val << endl;
+
+            cout << "q1 before calling sc_start(): " << endl; 
+            cout << q1val << endl;
             cout << "o1, o2, o3 before calling sc_start(): " << endl;
             cout << o1 << o2 << o3 << endl; 
 
             sc_start(1, SC_NS); // Evaluates model & progresses clock by 1 ns
             
-            cout << "q1, q2, q3 after calling sc_start()" << endl; 
-            cout << q1val << q2val <<  q3val << endl;
+            cout << "q1 after calling sc_start(): " << endl; 
+            cout << q1val << endl;
             cout << "o1, o2, o3 after calling sc_start(): " << endl;
             cout << o1 << o2 << o3 << endl; 
             cout << "[" << sc_time_stamp().value() << "] " << " clk=" << clk << " reset=" << reset << " enable=" << enable << " a=" << a << " o1=" << o1 
